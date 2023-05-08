@@ -16,6 +16,8 @@ class Keyboard:
     def __init__(self):
         self.right = False
         self.left = False
+        self.up = False
+        self.down = False
         self.space = False
     
     def keyDown(self, key):
@@ -27,6 +29,12 @@ class Keyboard:
         
         elif key == simplegui.KEY_MAP["space"]:
             self.space = True
+
+        elif key == simplegui.KEY_MAP["up"]:
+            self.up = True
+        
+        elif key == simplegui.KEY_MAP["down"]:
+            self.down = True
     
     def keyUp(self, key):
         if key == simplegui.KEY_MAP["right"]:
@@ -37,6 +45,12 @@ class Keyboard:
 
         elif key == simplegui.KEY_MAP["space"]:
             self.space = False
+
+        elif key == simplegui.KEY_MAP["up"]:
+            self.up = False
+        
+        elif key == simplegui.KEY_MAP["down"]:
+            self.down = False
 
 class Interaction:
     def __init__(self, game, keyboard):
