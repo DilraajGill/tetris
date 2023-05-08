@@ -12,4 +12,21 @@ class Spritesheet:
         self.dest_centre = dest_centre
         self.velocity = velocity
     
+class Keyboard:
+    def __init__(self, right, left):
+        self.right = right
+        self.left = left
     
+    def keyDown(self, key):
+        if key == simplegui.KEY_MAP["right"]:
+            self.right = True
+        
+        elif key == simplegui.KEY_MAP["left"]:
+            self.left = True
+    
+    def keyUp(self, key):
+        if key == simplegui.KEY_MAP["right"]:
+            self.right = False
+        
+        elif key == simplegui.KEY_MAP["left"]:
+            self.left = False
