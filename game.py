@@ -30,3 +30,8 @@ class Keyboard:
         
         elif key == simplegui.KEY_MAP["left"]:
             self.left = False
+
+class Interaction:
+    def __init__(self, game, keyboard):
+        self.keyboard = keyboard
+        self.game = game
