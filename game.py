@@ -13,9 +13,10 @@ class Spritesheet:
         self.velocity = velocity
     
 class Keyboard:
-    def __init__(self, right, left):
-        self.right = right
-        self.left = left
+    def __init__(self):
+        self.right = False
+        self.left = False
+        self.space = False
     
     def keyDown(self, key):
         if key == simplegui.KEY_MAP["right"]:
@@ -23,6 +24,9 @@ class Keyboard:
         
         elif key == simplegui.KEY_MAP["left"]:
             self.left = True
+        
+        elif key == simplegui.KEY_MAP["space"]:
+            self.space = True
     
     def keyUp(self, key):
         if key == simplegui.KEY_MAP["right"]:
@@ -31,7 +35,46 @@ class Keyboard:
         elif key == simplegui.KEY_MAP["left"]:
             self.left = False
 
+        elif key == simplegui.KEY_MAP["space"]:
+            self.space = False
+
 class Interaction:
     def __init__(self, game, keyboard):
         self.keyboard = keyboard
         self.game = game
+    
+    def update(self):   
+        if self.game.screen == "Welcome":
+            self.updateWelcome()
+    
+    def updateWelcome(self):
+        if self.keyboard.space == True:
+            self.game.screen = "gameplay"
+
+
+class Game:
+    def __init__(self):
+        self.screen = "Welcome"
+        self.frame_width = 1920
+        self.frame_height = 1080
+        self.frame = simplegui.create_frame("TETRIS", self.frame_width, self.frame_height)
+        self.initWelcome()
+
+        self.interObj = Interaction(self, Keyboard())
+        self.frame.set_draw_handler(self.draw)
+        self.frame.set_keydown_handler(self.interObj.keyboard.keyDown)
+        self.frame.set_keyup_handler(self.interObj.keyboard.keyUp)
+        self.frame.start()
+    
+    def draw(self, canvas):
+        self.interObj.update()
+        if self.screen == "Welcome":
+            self.drawWelcome(canvas)
+
+    def initWelcome(self):
+        self.welcomeText = "TETRIS"
+        self.welcome_width = (self.frame_width - self.frame.get_canvas_textwidth(self.welcomeText, 60, "monospace")) / 2
+
+    def drawWelcome(self, canvas):
+        canvas.draw_text(self.welcomeText, [self.welcome_width, 90], 60, "white", "monospace")
+game = Game()
