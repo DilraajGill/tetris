@@ -89,6 +89,8 @@ class Game:
         self.welcomeText = "TETRIS"
         self.welcome_width = (self.frame_width - self.frame.get_canvas_textwidth(self.welcomeText, 60, "monospace")) / 2
         self.controlText = "CONTROLS:"
+        self.enterText = "PRESS SPACE TO ENTER"
+        self.enter_width = (self.frame_width - self.frame.get_canvas_textwidth(self.enterText, 60, "monospace")) / 2
 
     def drawWelcome(self, canvas):
         canvas.draw_text(self.welcomeText, [self.welcome_width, 90], 60, "white", "monospace")
@@ -97,4 +99,6 @@ class Game:
         canvas.draw_text("Left Arrow: Move Left", [100, 300], 30, "white", "monospace")
         canvas.draw_text("Up Arrow: Rotate Clockwise", [100, 350], 30, "white", "monospace")
         canvas.draw_text("Down Arrow: Rotate Anticlockwise", [100, 400], 30, "white", "monospace")
+        canvas.draw_text(self.enterText, [self.enter_width, 900], 60, "white", "monospace")
+        
 game = Game()
